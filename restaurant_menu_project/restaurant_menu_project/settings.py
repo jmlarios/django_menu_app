@@ -24,7 +24,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Add your API keys here, preferably as environment variables for security
-CLAUDE_API_KEY = os.getenv('OPENAI_API_KEY', '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')
+ANTHROPIC_API_KEY = os.getenv('OPENAI_API_KEY', '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')
 
 
 from pathlib import Path
