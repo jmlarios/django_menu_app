@@ -1,8 +1,6 @@
 import fitz  # PyMuPDF
-import mysql.connector
 from google.cloud import vision
 from google.oauth2 import service_account
-from mysql.connector import Error
 import io
 from PIL import Image
 
@@ -50,41 +48,21 @@ def extract_text_from_image(image_path):
         print(f"An error occurred while extracting text from the image: {e}")
         return None
 
-# Function to insert text into MySQL database
-def insert_text_into_db(text):
+
+# Function to save text to a file
+def save_text_to_file(text, output_file_path):
     try:
-        # Connect to MySQL database
-        connection = mysql.connector.connect(
-            host='localhost',  # Replace with your MySQL host (e.g., 'localhost')
-            user='root',  # Replace with your MySQL username (e.g., 'root')
-            password='Mine-craft1',  # Replace with your MySQL password
-            database='restaurantmenusystem'  # Replace with your MySQL database name
-        )
-
-        if connection.is_connected():
-            cursor = connection.cursor()
-
-            # Query to insert extracted text into the table (adjust as needed)
-            insert_query = """INSERT INTO extracted_text_table (text_column) VALUES (%s)"""
-
-            # Insert the extracted text into the database
-            cursor.execute(insert_query, (text,))
-            connection.commit()
-
-            print("Text successfully inserted into the database.")
-
-    except Error as e:
-        print(f"Error: {e}")
-
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
+        with open(output_file_path, "w", encoding="utf-8") as file:
+            file.write(text)
+        print(f"Text successfully saved to {output_file_path}")
+    except Exception as e:
+        print(f"An error occurred while saving the text to a file: {e}")
 
 
-# Main function to orchestrate the extraction and insertion
+# Main function to orchestrate the extraction and saving to a file
 def main():
-    pdf_file_path = r"C:\Users\User\Downloads\restaurante_2.pdf"  # Specify the path to your PDF file
+    pdf_file_path = r""  # Specify the path to your PDF file
+    output_file_path = r"C:\<path-to-where-to-send-text>\extracted_text.txt"  # Path to save the extracted text
 
     # Extract text from PDF (if it contains text)
     extracted_text = extract_text_from_pdf(pdf_file_path)
@@ -92,7 +70,7 @@ def main():
     if extracted_text:
         print("Extracted text from PDF (direct text extraction):")
         print(extracted_text)
-        insert_text_into_db(extracted_text)  # Insert into DB if text found
+        save_text_to_file(extracted_text, output_file_path)  # Save the text to a file
     else:
         # If no text, extract text from images in the PDF using Google Vision API
         print("No text found in PDF. Attempting to extract text from images using Google Vision API.")
@@ -104,7 +82,7 @@ def main():
         if extracted_image_text:
             print("Extracted text from image (Google Vision API):")
             print(extracted_image_text)
-            insert_text_into_db(extracted_image_text)  # Insert into DB if text found from image
+            save_text_to_file(extracted_image_text, output_file_path)  # Save the text to a file
         else:
             print("No text could be extracted from the image.")
 
