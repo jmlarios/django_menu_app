@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 # OPENAI KEY
 import os
+
 from pathlib import Path
 
 # This defines the base directory of your project (where manage.py is located)
@@ -21,8 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # Add your API keys here, preferably as environment variables for security
-ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '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')
+CLAUDE_API_KEY = os.getenv('OPENAI_API_KEY', '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')
+
+
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -31,9 +40,10 @@ ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', 'sk-ant-api03-W5Fqdq1nJ3b89DN
 SECRET_KEY = 'django-insecure-dem8)g7l&=8a-@7v!*xjfi*_-&ptz%&(h0hbc8(2(ou#=6cqx='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -46,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'menu_app',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,19 +88,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'restaurant_menu_project.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME', default='restaurant_menus'),
-        'USER': config('DB_USER', default='root'),
-        'PASSWORD': config('DB_PASSWORD', default='your-password'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='3306'),
+        'NAME': 'restaurant_menus',
+        'USER': 'root',
+        'PASSWORD': 'ocheia06',
+        'HOST': 'localhost',  
+        'PORT': '3306',      
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -109,6 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -119,6 +133,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
