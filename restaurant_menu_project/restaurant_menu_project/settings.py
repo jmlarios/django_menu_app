@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 # OPENAI KEY
-from decouple import config
 import os
 from pathlib import Path
 
@@ -32,7 +31,7 @@ ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', 'sk-ant-api03-W5Fqdq1nJ3b89DN
 SECRET_KEY = 'django-insecure-dem8)g7l&=8a-@7v!*xjfi*_-&ptz%&(h0hbc8(2(ou#=6cqx='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
