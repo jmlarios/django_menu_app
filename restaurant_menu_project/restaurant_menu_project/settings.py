@@ -23,13 +23,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Add your API keys here, preferably as environment variables for security
-ANTHROPIC_API_KEY = config('ANTHROPIC_API_KEY')
+ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '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')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-dem8)g7l&=8a-@7v!*xjfi*_-&ptz%&(h0hbc8(2(ou#=6cqx='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
