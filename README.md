@@ -42,8 +42,7 @@ Follow these steps to set up the project:
    cd your-repository
 2. **Install the Required Libraries (TEMPORARY-WILL PUT THEM IN REQUIREMENTS FILE)**:
 
-pip install PyMuPDF
-pip install mysql-connector-python
-pip install google-cloud-vision
-pip install google-auth
+- pip install PyMuPDF
+- pip install google-cloud-vision
+- pip install google-auth
 
